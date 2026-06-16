@@ -40,11 +40,11 @@ module four_bit_PROCESSOR(
             
             case (opcode)
                 3'b000 : R1 <= operand; // LOAD R1
-                3'b001 : ACC <= alu_out; // 
-                3'b010 : ACC <= alu_out; //
-                3'b011 : ACC <= alu_out; //
-                3'b100 : ACC <= alu_out; //
-                3'b101 : ACC <= alu_out; //
+                3'b001 : ACC <= alu_out; 
+                3'b010 : ACC <= alu_out;
+                3'b011 : ACC <= alu_out;
+                3'b100 : ACC <= alu_out;
+                3'b101 : ACC <= alu_out;
                 
                 3'b111 : PC <= PC; // HALT
                 default : ;
