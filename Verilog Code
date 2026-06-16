@@ -1,0 +1,59 @@
+module four_bit_PROCESSOR(
+    input clk, rst,
+    output reg [3:0] ACC
+    );
+    
+    reg [2:0] PC;
+    reg [7:0] ROM [6:0];
+    reg [3:0] R1;
+    reg [2:0] opcode;
+    reg [3:0] operand;
+    
+    wire [3:0] alu_out;
+    
+    initial begin
+        ROM[0] = 8'b00000011; // LOAD 3
+        ROM[1] = 8'b00100101; // ADD 5
+        ROM[2] = 8'b01000001; // SUB 1
+        ROM[3] = 8'b01100110; // AND 6
+        ROM[4] = 8'b10000001; // OR 1
+        ROM[5] = 8'b10100111; // XOR 7
+        ROM[6] = 8'b11100000; // HALT
+    end
+    
+    assign alu_out = (opcode == 3'b001) ? (ACC + operand) :     // ADD
+                     (opcode == 3'b010) ? (ACC - operand) :     // SUB
+                     (opcode == 3'b011) ? (ACC & operand) :     // AND
+                     (opcode == 3'b100) ? (ACC | operand) :     // OR
+                     (opcode == 3'b101) ? (ACC ^ operand) :     // XOR
+                     4'b0000;
+     
+     always@(posedge clk or posedge rst) begin
+        if(rst) begin
+            PC <= 3'b000;
+            R1 <= 4'b0000;
+            ACC <= 4'b0000;
+        end
+        else begin
+            opcode = ROM[PC][7:5];
+            operand = ROM[PC][3:0];
+            
+            case (opcode)
+                3'b000 : R1 <= operand; // LOAD R1
+                3'b001 : ACC <= alu_out; // 
+                3'b010 : ACC <= alu_out; //
+                3'b011 : ACC <= alu_out; //
+                3'b100 : ACC <= alu_out; //
+                3'b101 : ACC <= alu_out; //
+                
+                3'b111 : PC <= PC; // HALT
+                default : ;
+            endcase
+            
+            if (opcode != 3'b111) begin
+                PC <= PC + 1; // Next instruction unless HALT
+            end
+            
+        end
+     end
+endmodule
