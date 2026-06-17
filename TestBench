@@ -15,6 +15,6 @@ module stimulii();
         rst = 1;
         #10 rst = 0;
         
-        #150 $stop;
+        #100 $stop;
     end
 endmodule
