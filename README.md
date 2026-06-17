@@ -1,12 +1,29 @@
-# 4-Bit Processor
-
-This project implements a simple 4-bit processor in Verilog HDL. The processor uses an accumulator-based architecture and supports basic instructions such as LOAD, ADD, SUB, AND, OR, XOR, and HALT. The design includes a Program Counter (PC), ROM-based instruction memory, Arithmetic Logic Unit (ALU), and instruction execution logic.
+This project implements a simple accumulator-based 4-bit processor using Verilog HDL. The processor executes instructions stored in ROM and supports arithmetic and logical operations through a built-in ALU.
 
 ## Features
 - 4-bit Accumulator (ACC)
-- ROM-based program memory
-- Program Counter (PC)
-- Arithmetic operations: ADD, SUB
-- Logical operations: AND, OR, XOR
-- LOAD and HALT instructions
-- Sequential instruction execution
+- 3-bit Program Counter (PC)
+- ROM-based instruction memory
+- Arithmetic operations:
+  - ADD
+  - SUB
+- Logical operations:
+  - AND
+  - OR
+  - XOR
+- Control instructions:
+  - LOAD
+  - HALT
+- Sequential Fetch-Decode-Execute operation
+
+## Instruction Set
+
+| Opcode | Instruction |
+|----------|------------|
+| 000 | LOAD |
+| 001 | ADD |
+| 010 | SUB |
+| 011 | AND |
+| 100 | OR |
+| 101 | XOR |
+| 111 | HALT |
